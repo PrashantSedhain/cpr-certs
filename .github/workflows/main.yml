@@ -20,7 +20,7 @@ jobs:
         run: npm run build
 
       - name: Start Next.js app
-        run: npm run start
+        run: npm run build
         env:
           NODE_ENV: production
           NEXT_TELEMETRY_DISABLED: 1
