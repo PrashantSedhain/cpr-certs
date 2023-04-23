@@ -53,7 +53,7 @@ const MissionSection = () => {
             </Content>
           </Box>
           <Link href="#" fontSize="sm" color="blue.400">
-            See how people are using our components →
+            Learn more about our team →
           </Link>
         </Stack>
       </Stack>
