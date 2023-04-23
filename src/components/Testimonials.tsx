@@ -33,7 +33,7 @@ const TestimonialContent = ({ children }: { children: ReactNode }) => {
         borderRightWidth: 16,
         borderTop: 'solid',
         borderTopWidth: 16,
-        borderTopColor: useColorModeValue('white', 'gray.800'),
+        borderTopColor: useColorModeValue('white', 'gray.200'),
         pos: 'absolute',
         bottom: '-16px',
         left: '50%',
