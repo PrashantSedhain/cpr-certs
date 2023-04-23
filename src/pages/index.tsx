@@ -1,6 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import Home from "./home";
 import Courses from "./courses";
+import Navbar from "@/components/Navbar";
 
 export default function Main() {
     return (

@@ -44,7 +44,7 @@ export default function Course(props: CourseProps) {
                                     position: 'absolute',
                                     bottom: 1,
                                     left: 0,
-                                    bg: 'red.400',
+                                    bg: 'gray.100',
                                     zIndex: -1,
                                 }}>
                                 {props.title}
