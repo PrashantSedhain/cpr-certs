@@ -66,7 +66,7 @@ export default function Course(props: CourseProps) {
                                 colorScheme={'red'}
                                 bg={'red.400'}
                                 _hover={{ bg: 'red.500' }}>
-                                Sign Up
+                                Register
                             </Button>
                             <Button
                                 rounded={'full'}

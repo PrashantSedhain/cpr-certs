@@ -19,13 +19,14 @@ const MissionSection = () => {
         <Box mr={{ base: 0, md: 5 }} pos="relative">
           <DottedBox />
           <Image
+            alt="mission section image"
             boxShadow="lg"
             w="100%"
             h="100%"
             minW={{ base: "auto", md: "30rem" }}
             maxH="20rem"
             objectFit="cover"
-            src={`https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&auto=format&fit=crop&w=334&q=80`}
+            src={'https://plus.unsplash.com/premium_photo-1663045451502-f385b6c4e093?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80'}
             rounded="md"
             fallback={<Skeleton />}
           />
@@ -42,7 +43,7 @@ const MissionSection = () => {
           <Box>
             <Content>
               At CPR Certs, we understand that in an emergency every second
-              counts. That's why we're on a mission to empower individuals with
+              counts. That is why we are on a mission to empower individuals with
               life-saving CPR skills.
             </Content>
             <Content mt={4}>
