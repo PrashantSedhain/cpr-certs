@@ -1,11 +1,10 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import Courses from "./courses";
-import Navbar from "@/components/Navbar";
+import Home from "./home";
 
 export default function Main() {
     return (
         <ChakraProvider>
-            <Courses />
+            <Home />
         </ChakraProvider>
     )
 }

@@ -17,6 +17,7 @@ import {
 interface CourseProps {
     description: string;
     title: string;
+    subTitle: string;
     image: string;
 }
 
@@ -51,7 +52,7 @@ export default function Course(props: CourseProps) {
                             </Text>
                             <br />
                             <Text as={'span'} color={'red.400'}>
-                                2 Day Course!
+                                {props.subTitle}
                             </Text>
                         </Heading>
                         <Text color={'gray.500'}>{props.description}</Text>
