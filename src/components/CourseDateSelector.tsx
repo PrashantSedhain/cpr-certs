@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import enUS from "date-fns/locale/en-US";
 
 interface Class {
   id: string;
