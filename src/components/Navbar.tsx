@@ -236,7 +236,7 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
         label: 'Home',
-        href: `/home`,
+        href: `home`,
   },
   {
     label: 'Find Work',
@@ -255,14 +255,14 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'Courses',
-    href: `/courses`,
+    href: `courses`,
   },
   {
     label: 'Contact Us',
-    href: `/contact`,
+    href: `contact`,
   },
   {
     label: 'Admin',
-    href: `/admin`,
+    href: `admin`,
   },
 ];
