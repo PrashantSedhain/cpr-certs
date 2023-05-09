@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev && echo 'App started on http://localhost:3000/cpr-certs'",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
