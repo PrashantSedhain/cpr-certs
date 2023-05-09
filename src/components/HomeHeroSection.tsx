@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Container, chakra, Stack, Text, Button, Box } from "@chakra-ui/react";
 // Here we have used react-icons package for the icons
-import { FaBook, FaGithub } from "react-icons/fa";
+import { FaBook, FaSearch } from "react-icons/fa";
 
 const HeroSection = () => {
   return (
@@ -27,7 +27,7 @@ const HeroSection = () => {
           textAlign="center"
           maxW="600px"
         >
-          Be prepared to save a life with CPR certification course {" "}
+          Be prepared to save a life with CPR certification course{" "}
           <chakra.span
             color="red.400"
             bg="linear-gradient(transparent 50%, red.400 50%)"
@@ -46,6 +46,7 @@ const HeroSection = () => {
           spacing={5}
         >
           <Button
+            leftIcon={<FaSearch />}
             colorScheme="red"
             variant="outline"
             rounded="md"
