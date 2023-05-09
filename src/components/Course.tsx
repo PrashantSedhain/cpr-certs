@@ -12,6 +12,7 @@ import {
     IconProps,
     useColorModeValue,
     ChakraProvider,
+    Link
 } from '@chakra-ui/react';
 
 interface CourseProps {
@@ -59,16 +60,18 @@ export default function Course(props: CourseProps) {
                         <Stack
                             spacing={{ base: 4, sm: 6 }}
                             direction={{ base: 'column', sm: 'row' }}>
-                            <Button
-                                rounded={'full'}
-                                size={'lg'}
-                                fontWeight={'normal'}
-                                px={6}
-                                colorScheme={'red'}
-                                bg={'red.400'}
-                                _hover={{ bg: 'red.500' }}>
-                                Register
-                            </Button>
+                            <Link href='/registration'>
+                                <Button
+                                    rounded={'full'}
+                                    size={'lg'}
+                                    fontWeight={'normal'}
+                                    px={6}
+                                    colorScheme={'red'}
+                                    bg={'red.400'}
+                                    _hover={{ bg: 'red.500' }}>
+                                    Register
+                                </Button>
+                            </Link>
                             <Button
                                 rounded={'full'}
                                 size={'lg'}
@@ -86,7 +89,6 @@ export default function Course(props: CourseProps) {
                         position={'relative'}
                         w={'full'}>
                         <Blob
-                            w={'150%'}
                             h={'150%'}
                             position={'absolute'}
                             top={'-20%'}
