@@ -23,6 +23,8 @@ import {
 } from '@chakra-ui/icons';
 import { SignInModal } from './SignInModal';
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
 
@@ -234,7 +236,7 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
         label: 'Home',
-        href: '/home',
+        href: `/home`,
   },
   {
     label: 'Find Work',
@@ -253,14 +255,14 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'Courses',
-    href: '/courses',
+    href: `/courses`,
   },
   {
     label: 'Contact Us',
-    href: '/contact',
+    href: `/contact`,
   },
   {
     label: 'Admin',
-    href: '/admin',
+    href: `/admin`,
   },
 ];

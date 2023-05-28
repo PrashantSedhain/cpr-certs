@@ -1,7 +1,7 @@
-export default function Contact() {
+import Contact from "@/components/Contact";
+
+export default function ContactUs() {
     return (
-        <div>
-            <h3>Contact Page</h3>
-        </div>
+        <Contact />
     )
 }

@@ -1,1 +1,11 @@
-
+.custom-datepicker {
+    width: 100%; /* Adjust the width as needed */
+    background-color: #EDF2F6;
+    border: none;
+    color: #718096;
+    border-radius: 4px;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    outline: none;
+    font-size: inherit;
+  }
