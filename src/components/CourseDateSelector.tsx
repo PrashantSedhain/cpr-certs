@@ -1,5 +1,5 @@
+import { Select } from "chakra-react-select";
 import React, { useState, useEffect } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 interface Class {
@@ -11,10 +11,15 @@ interface Class {
   enrolled_students: [string];
 }
 
+type DateOption = {
+  value: string;
+  label: string;
+};
+
 const BASE_URL: string = "http://localhost:8080";
 
 const CourseDateSelector = () => {
-  const [startDate, setStartDate] = useState(null);
+  const [courseId, setSelectedCourseId] = useState<string>();
   const [classes, setClasses] = useState<Class[]>([]);
 
   useEffect(() => {
@@ -22,7 +27,7 @@ const CourseDateSelector = () => {
       try {
         let response: any = await fetch(`${BASE_URL}/class/all`);
         response = await response.json();
-        if (response?.success) {
+        if (response?.success && response?.data) {
           setClasses(response?.data);
         }
       } catch (error) {
@@ -32,19 +37,51 @@ const CourseDateSelector = () => {
     loadClasses();
   }, []);
 
-  const getAvailableDatesForClasses = () => {
-    const dates: Date[] = classes.map((c) => new Date(c.start_date));
+  const getAvailableDatesForClasses = (): DateOption[] => {
+    const dates: DateOption[] = classes.map((c) => {
+      const startDate = new Date(c.start_date);
+      const endDate = new Date(c.end_date);
+
+      const formattedStartDate = startDate.toLocaleDateString("en-US", {
+        month: "long", // Full month name
+        day: "numeric", // Day of the month (1-31)
+        year: "numeric", // Full year
+      });
+
+      const formattedEndDate = endDate.toLocaleDateString("en-US", {
+        month: "long", // Full month name
+        day: "numeric", // Day of the month (1-31)
+        year: "numeric",
+      });
+      return {
+        label: `${formattedStartDate} - ${formattedEndDate}`,
+        value: c.course_id,
+      };
+    });
     return dates;
   };
 
   return (
-    <DatePicker
-      placeholderText={"Select start date"}
-      selected={startDate}
-      onChange={(date: Date) => setStartDate(date)}
-      includeDates={getAvailableDatesForClasses()}
-      withPortal
-      className="custom-datepicker"
+    <Select
+      name="colors"
+      className="chakra-react-select"
+      classNamePrefix="chakra-react-select"
+      placeholder="Select from available dates"
+      options={getAvailableDatesForClasses()}
+      selectedOptionStyle="check"
+      onChange={(option) => setSelectedCourseId(option?.value)}
+      chakraStyles={{
+        dropdownIndicator: (provided) => ({
+          ...provided,
+          bg: "gray.100",
+          px: 2,
+          cursor: "inherit",
+        }),
+        indicatorSeparator: (provided) => ({
+          ...provided,
+          display: "none",
+        }),
+      }}
     />
   );
 };
