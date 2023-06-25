@@ -15,7 +15,6 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import CourseDateSelector from "./CourseDateSelector";
-import { useState } from "react";
 
 const avatars = [
   {
@@ -41,8 +40,6 @@ const avatars = [
 ];
 
 export default function JoinOurTeam() {
-  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-
   return (
     <Box position={"relative"}>
       <Container
@@ -146,14 +143,15 @@ export default function JoinOurTeam() {
               </Text>
             </Heading>
             <Text color={"gray.500"} fontSize={{ base: "sm", sm: "md" }}>
-              We’re looking for amazing engineers just like you! Become a part
-              of our rockstar engineering team and skyrocket your career!
+              We’re excited about your decision to join us soon. At Lifeline
+              Care we offer very streamlined and cohesive certification courses
+              to boost you ahead in your career.
             </Text>
           </Stack>
           <Box as={"form"} mt={10}>
             <Stack spacing={4}>
               <Input
-                placeholder="Firstname"
+                placeholder="Full Name"
                 bg={"gray.100"}
                 border={0}
                 color={"gray.500"}
@@ -162,7 +160,7 @@ export default function JoinOurTeam() {
                 }}
               />
               <Input
-                placeholder="firstname@lastname.io"
+                placeholder="Email"
                 bg={"gray.100"}
                 border={0}
                 color={"gray.500"}
@@ -171,7 +169,7 @@ export default function JoinOurTeam() {
                 }}
               />
               <Input
-                placeholder="+1 (___) __-___-___"
+                placeholder="Phone"
                 bg={"gray.100"}
                 border={0}
                 color={"gray.500"}
