@@ -1,5 +1,4 @@
 import Course from "@/components/Course";
-import CourseForm from "@/components/CourseForm";
 import { Course as ICourse } from "@/models/models";
 import { useEffect, useState } from "react";
 import courseApi from "../../api/coursesApi";
@@ -25,7 +24,6 @@ export default function Courses() {
           />
         );
       })}
-      <CourseForm />
     </div>
   );
 }

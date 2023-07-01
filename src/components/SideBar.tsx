@@ -22,7 +22,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { ReactNode, ReactText } from "react";
+import { ReactNode } from "react";
 import { IconType } from "react-icons";
 import {
   FiBell,
@@ -31,6 +31,7 @@ import {
   FiMenu,
   FiSettings,
 } from "react-icons/fi";
+import { GrAddCircle } from "react-icons/gr";
 
 interface LinkItemProps {
   name: string;
@@ -39,6 +40,7 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, to: "/" },
+  { name: "Add Course", icon: GrAddCircle, to: "/admin/addCourse" },
   { name: "Settings", icon: FiSettings, to: "/" },
 ];
 
@@ -109,7 +111,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
-  children: ReactText;
+  children: string | number;
   to: string;
 }
 const NavItem = ({ icon, children, to, ...rest }: NavItemProps) => {
