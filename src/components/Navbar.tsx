@@ -69,14 +69,14 @@ export default function WithSubnavigation() {
           </Flex>
         </Flex>
 
-        <Stack
+        {/* <Stack
           flex={{ base: 1, md: 0 }}
           justify={"flex-end"}
           direction={"row"}
           spacing={6}
         >
           <SignInModal />
-        </Stack>
+        </Stack> */}
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
@@ -253,30 +253,15 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "/home",
   },
   {
-    label: "Find Work",
-    children: [
-      {
-        label: "Job Board",
-        subLabel: "Find your dream design job",
-        href: "#",
-      },
-      {
-        label: "Freelance Projects",
-        subLabel: "An exclusive list for contract work",
-        href: "#",
-      },
-    ],
-  },
-  {
     label: "Courses",
     href: "/courses",
   },
   {
     label: "Contact Us",
     href: "/contact",
-  },
-  {
-    label: "Admin",
-    href: "/admin",
-  },
+  }
+  // {
+  //   label: "Admin",
+  //   href: "/admin",
+  // },
 ];
