@@ -1,35 +1,19 @@
 import Course from "@/components/Course";
+import { Course as ICourse } from "@/models/models";
 import { useEffect, useState } from "react";
-
-interface Course {
-  id: string;
-  description: string;
-}
-
-const BASE_URL = "http://localhost:8080";
+import courseApi from "../../api/coursesApi";
 
 export default function Courses() {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState<ICourse[]>([]);
 
   useEffect(() => {
-    const loadCourses = async () => {
-      try {
-        let response: any = await fetch(`${BASE_URL}/course/all`);
-        response = await response.json();
-        console.log(response);
-        if (response?.success) {
-          setCourses(response?.data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    loadCourses();
+    const loadCourses = async () => await courseApi.getAllCourses();
+    loadCourses().then((courses) => setCourses(courses));
   }, []);
 
   return (
     <div>
-      {courses.map((course: Course) => {
+      {courses.map((course) => {
         return (
           <Course
             key={course.id}
@@ -39,6 +23,7 @@ export default function Courses() {
             image="https://images.unsplash.com/photo-1630964046403-8b745c1e3c69?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2020&q=80"
           />
         );
-      })}</div>
+      })}
+    </div>
   );
 }
