@@ -14,7 +14,11 @@ import {
   IconProps,
   Icon,
 } from "@chakra-ui/react";
-import CourseDateSelector from "./CourseDateSelector";
+import { useForm, Controller } from "react-hook-form";
+import { phone } from "phone";
+import { validate as ValidateEmail } from "email-validator";
+import React, { useState, useEffect } from "react";
+import { Select } from "chakra-react-select";
 
 const avatars = [
   {
@@ -39,7 +43,80 @@ const avatars = [
   },
 ];
 
+type FormData = {
+  fullName: string;
+  email: string;
+  phone: string;
+  courseDate: DateOption;
+};
+interface Class {
+  id: string;
+  course_id: string;
+  start_date: string;
+  end_date: string;
+  location: string;
+  enrolled_students: [string];
+}
+
+type DateOption = {
+  value: string;
+  label: string;
+};
 export default function JoinOurTeam() {
+  const avatarGroupSize = useBreakpointValue({ base: "md", md: "lg" });
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormData>();
+
+  const onSubmit = (data: FormData) => {
+    // Handle form submission here
+    console.log(data);
+  };
+    const BASE_URL: string = "http://localhost:8080";
+    const [classes, setClasses] = useState<Class[]>([]);
+
+    useEffect(() => {
+      const loadClasses = async () => {
+        try {
+          let response: any = await fetch(`${BASE_URL}/class/all`);
+          response = await response.json();
+          if (response?.success && response?.data) {
+            setClasses(response?.data);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      loadClasses();
+    }, []);
+
+    const getAvailableDatesForClasses = (): DateOption[] => {
+      const dates: DateOption[] = classes.map((c) => {
+        const startDate = new Date(c.start_date);
+        const endDate = new Date(c.end_date);
+
+        const formattedStartDate = startDate.toLocaleDateString("en-US", {
+          month: "long", // Full month name
+          day: "numeric", // Day of the month (1-31)
+          year: "numeric", // Full year
+        });
+
+        const formattedEndDate = endDate.toLocaleDateString("en-US", {
+          month: "long", // Full month name
+          day: "numeric", // Day of the month (1-31)
+          year: "numeric",
+        });
+        return {
+          label: `${formattedStartDate} - ${formattedEndDate}`,
+          value: c.course_id,
+        };
+      });
+      return dates;
+    };
+
+
   return (
     <Box position={"relative"}>
       <Container
@@ -71,7 +148,7 @@ export default function JoinOurTeam() {
                   key={avatar.name}
                   name={avatar.name}
                   src={avatar.url}
-                  size={useBreakpointValue({ base: "md", md: "lg" })}
+                  size={avatarGroupSize}
                   position={"relative"}
                   zIndex={2}
                   _before={{
@@ -148,38 +225,139 @@ export default function JoinOurTeam() {
               to boost you ahead in your career.
             </Text>
           </Stack>
-          <Box as={"form"} mt={10}>
+          <Box as={"form"} mt={10} onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={4}>
-              <Input
-                placeholder="Full Name"
-                bg={"gray.100"}
-                border={0}
-                color={"gray.500"}
-                _placeholder={{
-                  color: "gray.500",
-                }}
+              <Controller
+                control={control}
+                name="fullName"
+                defaultValue=""
+                rules={{ required: "Full Name is required" }}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    isInvalid={!!errors.fullName}
+                    focusBorderColor="green.500"
+                    errorBorderColor="red.500"
+                    placeholder="Full Name *"
+                    bg={"gray.100"}
+                    border={0}
+                    color={"gray.500"}
+                    _placeholder={{
+                      color: "gray.500",
+                    }}
+                  />
+                )}
               />
-              <Input
-                placeholder="Email"
-                bg={"gray.100"}
-                border={0}
-                color={"gray.500"}
-                _placeholder={{
-                  color: "gray.500",
+              {errors.fullName && (
+                <Text color="red">{errors?.fullName.message || ""}</Text>
+              )}
+              <Controller
+                control={control}
+                name="email"
+                defaultValue=""
+                rules={{
+                  required: "Email is required",
+                  validate: (value) => {
+                    const valid = ValidateEmail(value);
+                    if (!valid) {
+                      return "Please enter valid email!";
+                    }
+                  },
                 }}
+                render={({ field }) => (
+                  <Input
+                    isInvalid={!!errors.email}
+                    focusBorderColor="green.500"
+                    errorBorderColor="red.500"
+                    {...field}
+                    placeholder="Email *"
+                    bg={"gray.100"}
+                    border={0}
+                    color={"gray.500"}
+                    _placeholder={{
+                      color: "gray.500",
+                    }}
+                  />
+                )}
               />
-              <Input
-                placeholder="Phone"
-                bg={"gray.100"}
-                border={0}
-                color={"gray.500"}
-                _placeholder={{
-                  color: "gray.500",
+              {errors.email && (
+                <Text color="red">{errors.email.message || ""}</Text>
+              )}
+              <Controller
+                control={control}
+                name="phone"
+                defaultValue=""
+                rules={{
+                  required: "Phone is required",
+                  validate: (value) => {
+                    const valid = phone(value, { country: "USA" });
+                    if (!valid.isValid) {
+                      return "Phone enter valid phone number!";
+                    }
+                  },
                 }}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    isInvalid={!!errors.phone}
+                    focusBorderColor="green.500"
+                    errorBorderColor="red.500"
+                    placeholder="Phone *"
+                    bg={"gray.100"}
+                    border={0}
+                    color={"gray.500"}
+                    _placeholder={{
+                      color: "gray.500",
+                    }}
+                  />
+                )}
               />
-              <CourseDateSelector />
+              {errors.phone && (
+                <Text color="red">{errors?.phone?.message || ""}</Text>
+              )}
+              <Controller
+                control={control}
+                name="courseDate"
+                defaultValue={undefined}
+                rules={{
+                  required: "Course date is required",
+                }}
+                render={({ field: { onChange, onBlur, value, name, ref } }) => (
+                  <Select
+                    ref={ref}
+                    isInvalid={!!errors.courseDate}
+                    focusBorderColor="green.500"
+                    errorBorderColor="red.500"
+                    name={name}
+                    value={value}
+                    onBlur={onBlur}
+                    className="chakra-react-select"
+                    classNamePrefix="chakra-react-select"
+                    placeholder="Select from available dates *"
+                    options={getAvailableDatesForClasses()}
+                    selectedOptionStyle="check"
+                    onChange={onChange}
+                    chakraStyles={{
+                      dropdownIndicator: (provided) => ({
+                        ...provided,
+                        bg: "gray.100",
+                        px: 2,
+                        cursor: "inherit",
+                      }),
+                      indicatorSeparator: (provided) => ({
+                        ...provided,
+                        display: "none",
+                      }),
+                    }}
+                  />
+                )}
+              />
+              {errors.courseDate && (
+                <Text color="red">{errors?.courseDate?.message || ""}</Text>
+              )}
             </Stack>
             <Button
+              type="submit"
               fontFamily={"heading"}
               mt={8}
               w={"full"}
@@ -193,7 +371,6 @@ export default function JoinOurTeam() {
               Continue to Payment
             </Button>
           </Box>
-          form
         </Stack>
       </Container>
       <Blur

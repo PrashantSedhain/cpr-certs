@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Container, chakra, Stack, Text, Button, Box } from "@chakra-ui/react";
+    Link
+import { Container, chakra, Stack, Text, Button, Box, Link } from "@chakra-ui/react";
 // Here we have used react-icons package for the icons
 import { FaBook, FaSearch } from "react-icons/fa";
+import NextLink from "next/link";
 
 const HeroSection = () => {
   return (
@@ -45,17 +47,20 @@ const HeroSection = () => {
           w={{ base: "100%", sm: "auto" }}
           spacing={5}
         >
-          <Button
-            leftIcon={<FaSearch />}
-            colorScheme="red"
-            variant="outline"
-            rounded="md"
-            size="lg"
-            height="3.5rem"
-            fontSize="1.2rem"
-          >
-            Find Classes
-          </Button>
+          <Link as={NextLink} href="/courses">
+            <Button
+              leftIcon={<FaSearch />}
+              colorScheme="red"
+              variant="outline"
+              rounded="md"
+              size="lg"
+              height="3.5rem"
+              fontSize="1.2rem"
+            >
+              Find Classes
+            </Button>
+          </Link>
+
           <Button
             leftIcon={<FaBook />}
             colorScheme="gray"
