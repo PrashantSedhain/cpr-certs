@@ -16,9 +16,9 @@ type DateOption = {
   label: string;
 };
 
+const BASE_URL: string = "http://localhost:8080";
 
 const CourseDateSelector = () => {
-const BASE_URL: string = "http://localhost:8080";
   const [courseId, setSelectedCourseId] = useState<string>();
   const [classes, setClasses] = useState<Class[]>([]);
 

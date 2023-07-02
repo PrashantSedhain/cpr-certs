@@ -333,7 +333,7 @@ export default function JoinOurTeam() {
                     onBlur={onBlur}
                     className="chakra-react-select"
                     classNamePrefix="chakra-react-select"
-                    placeholder="Select from available dates *"
+                    placeholder="Select from available dates"
                     options={getAvailableDatesForClasses()}
                     selectedOptionStyle="check"
                     onChange={onChange}
